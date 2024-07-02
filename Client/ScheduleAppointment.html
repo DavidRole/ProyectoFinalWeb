@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clinicaFigueres.com</title>
+    <link rel="stylesheet" href="ScheduleAppointment.css">
+</head>
+
+<body>
+    <div class="mainbody">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="/Images/logo.png" alt="logoClinica">
+                <a href="ClientLogin.html">Cerrar sesión</a>
+            </div>
+
+            <div class="menu">
+                <div class="menulinks">
+                    <a href="HomeWindow.html" class="link">Informacion personal</a>
+                    <a href="ScheduleAppointment.html" class="link">Agendar Cita</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="schedule">
+            <section class="doctors">
+                <label class="labels" for="doctor">Seleccione un médico:</label>
+                <select id="list" name="doctor">
+                    <option value="medico1">Dr. Juan Pérez Cardiologo</option>
+                    <option value="medico2">Dra. Ana Gómez Pediatra</option>
+                    <option value="medico3">Dr. Carlos Ramírez Pediatra</option>
+                    <option value="medico4">Dra. Lucía Fernández Pediatra</option>
+                </select>
+            </section>
+
+            <section class="inputDate">
+                <label for="date" class="labels">Ingrese la fecha de la cita:</label>
+                <input class="date" type="datetime-local"></input>
+            </section>
+        </div>
+
+        <div class="buttonSchedule">
+            <button class="buttons">
+                <label for="buttons">Agendar Cita</label>
+            </button>
+        </div>
+
+        <iframe src="Footer.html" frameborder="0"></iframe>
+    </div>
+</body>
+
+</html>

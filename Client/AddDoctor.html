@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clinicaFigueres.com</title>
+    <link rel="stylesheet" href="AddDoctorStyle.css">
+</head>
+
+<body>
+    <div class="mainbody">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="/Images/logo.png" alt="logoClinica">
+                <a href="ClientLogin.html">Cerrar sesión</a>
+            </div>
+        </nav>
+        <div class="doctorName">
+            <label class="labels" for="doctorName">Ingrese el nombre:</label>
+            <input type="text" name="name" id="doctorName">
+        </div>
+
+
+        <section class="doctorSpeciality">
+            <label class="labels" for="doctor">Seleccione una especialidad:</label>
+            <select id="list" name="doctor">
+                <option value="medico1">Cardiologo</option>
+                <option value="medico2">Pediatra</option>
+                <option value="medico3">Dermatologia</option>
+                <option value="medico4">Neuro</option>
+            </select>
+        </section>
+
+        <div class="buttonAdd">
+            <button class="buttons">
+                <label for="buttons">Agregar Medico</label>
+            </button>
+        </div>
+        <div class="buttonAdd">
+            <button class="buttons">
+                <a href="AdminWindow.html" class="link">Regresar</a>
+            </button>
+        </div>
+        <iframe src="Footer.html" frameborder="0"></iframe>
+    </div>
+</body>
+
+</html>

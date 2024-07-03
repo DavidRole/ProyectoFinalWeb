@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clinicaFigueres.com</title>
+    <link rel="stylesheet" href="AdminWindow.css">
+</head>
+
+<body>
+
+    <div class="mainbody">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="/Images/logo.png" alt="logoClinica">
+                <a href="ClientLogin.html">Cerrar sesión</a>
+            </div>
+        </nav>
+
+        <div class="admin">
+            <section class="doctors">
+                <label class="labels" for="doctor">Seleccione un médico:</label>
+                <select id="list" name="doctor">
+                    <option value="medico1">Dr. Juan Pérez Cardiologo</option>
+                    <option value="medico2">Dra. Ana Gómez Pediatra</option>
+                    <option value="medico3">Dr. Carlos Ramírez Pediatra</option>
+                    <option value="medico4">Dra. Lucía Fernández Pediatra</option>
+                </select>
+            </section>
+
+            <button class="buttons">Ver detalles</button>
+        </div>
+        <div class="buttonAdmin">
+            <button class="buttons">
+                <label for="buttons">Agendar Medico</label>
+            </button>
+        </div>
+        <iframe src="Footer.html" frameborder="0"></iframe>
+    </div>
+</body>
+
+</html>

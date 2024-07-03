@@ -1,0 +1,141 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #252422;
+    font-family: system-ui, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+}
+
+.logo {
+    margin-right: 500px;
+}
+
+.navbar .logo {
+    display: inline-flex;
+    align-items: center;
+}
+
+.logo a {
+    margin-left: 10px;
+    font-weight: 500;
+    color: #9e9e9e;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.logo a:hover {
+    margin-left: 20px;
+    background-color: white;
+    color: #252422;
+}
+
+.navbar {
+    margin-left: 10px;
+    height: 90px;
+    background-color: #333;
+    padding: 20px 40px 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.menulinks {
+    display: flex;
+    gap: 24px;
+    border-right: 3px solid #dbdbdb;
+    padding-inline: 24px;
+}
+
+.menulinks a {
+    font-weight: 500;
+    color: #9e9e9e;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.menulinks a:hover {
+    background-color: white;
+    color: #252422;
+}
+
+iframe {
+    width: 100%;
+    height: 270px;
+}
+
+.labels {
+    color: white;
+    font-weight: 500;
+}
+
+#list {
+    background-color: #333;
+    border-radius: 7px;
+    color: white;
+    padding: 10px;
+    border-right: 3px solid #dbdbdb;
+}
+
+.admin {
+    margin-top: 50px;
+    padding: 20px;
+    display: flex;
+    gap: 24px;
+    padding-inline: 24px;
+    align-items: center;
+    justify-content:space-evenly;
+    padding: 40px 0 40px 0;
+}
+
+.buttonAdmin{
+    padding: 20px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.buttons{
+    height: 50px;
+    max-width: 0 auto;
+    border-radius: 10px;
+    color: #9e9e9e;
+    background-color: transparent;
+    border: 2px solid #9e9e9e;
+    transition: 0.3s;
+}
+
+.buttons label{
+    text-size-adjust: auto;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.buttons:hover{
+    background-color: #ffff;
+    color: #252422;
+    border-color: #ffff;
+}

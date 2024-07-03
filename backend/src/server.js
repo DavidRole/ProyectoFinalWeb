@@ -17,9 +17,11 @@ app.set('port', process.env.port || 3000)
 
 // Importar las rutas
 app.use(require('./routes/index'))
+app.use('/api/courses', require('./routes/doctors'))
+app.use('/api/courses', require('./routes/patiends'))
 app.use('/api/courses', require('./routes/courses'))
 
-// Iniciar la aplicación
+// Iniciar la apl
 app.listen(app.get('port'), () => {
     console.log(`Listening on port ${app.get('port')}`)
 })

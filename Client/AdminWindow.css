@@ -64,7 +64,6 @@ nav {
 .menulinks {
     display: flex;
     gap: 24px;
-    border-right: 3px solid #dbdbdb;
     padding-inline: 24px;
 }
 
@@ -97,6 +96,13 @@ iframe {
     color: white;
     padding: 10px;
     border-right: 3px solid #dbdbdb;
+}
+.menulinks a {
+    font-weight: 500;
+    color: #9e9e9e;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: 0.2s;
 }
 
 .admin {

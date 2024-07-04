@@ -25,6 +25,11 @@ nav {
     margin-right: 500px;
 }
 
+.logo .labels {
+    margin-left: 10px;
+    color: #9e9e9e;
+}
+
 .navbar .logo {
     display: inline-flex;
     align-items: center;
@@ -98,6 +103,6 @@ iframe {
     gap: 24px;
     padding-inline: 24px;
     align-items: center;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
     padding: 40px 0 40px 0;
 }

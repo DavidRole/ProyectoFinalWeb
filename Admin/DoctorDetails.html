@@ -9,17 +9,18 @@
 </head>
 
 <body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/Images/logo.png" alt="logoClinica">
+            <label class="labels" for="admin">Administrador</label>
+        </div>
+        <div class="menulinks">
+            <a href="AdminWindow.html">Inicio</a>
+            <a href="AddDoctor.html" class="link">Agregar Medico</a>
+        </div>
+    </nav>
+
     <div class="mainbody">
-        <nav class="navbar">
-            <div class="logo">
-                <img src="/Images/logo.png" alt="logoClinica">
-                <label class="labels" for="admin">Administrador</label>
-            </div>
-            <div class="menulinks">
-                <a href="AdminWindow.html">Inicio</a>
-                <a href="AddDoctor.html" class="link">Agregar Medico</a>
-            </div>
-        </nav>
 
         <div class="doctorDetails">
             <br>
@@ -28,6 +29,12 @@
             <br>
             <br>
             <br>
+        </div>
+
+        <div class="buttonSchedule">
+            <button class="buttons">
+                <label for="buttons">Cancelar Todas las Citas</label>
+            </button>
         </div>
 
         <iframe src="/Client/Footer.html" frameborder="0"></iframe>

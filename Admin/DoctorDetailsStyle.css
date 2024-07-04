@@ -21,6 +21,16 @@ nav {
     z-index: 4;
 }
 
+.mainbody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin-top: 0;
+}
+
 .logo {
     margin-right: 500px;
 }
@@ -94,6 +104,29 @@ iframe {
 .labels {
     color: white;
     font-weight: 500;
+}
+
+.buttons {
+    margin: 40px 0px 20px 0px;
+    height: 50px;
+    max-width: 0 auto;
+    border-radius: 10px;
+    color: #9e9e9e;
+    background-color: transparent;
+    border: 2px solid #9e9e9e;
+    transition: 0.3s;
+}
+
+.buttons label {
+    text-size-adjust: auto;
+    font-weight: 500;
+    font-size: large;
+}
+
+.buttons:hover {
+    background-color: rgb(167, 17, 47);
+    color: #252422;
+    border-color: rgb(167, 17, 47);
 }
 
 .doctorDetails {

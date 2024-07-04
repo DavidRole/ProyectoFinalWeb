@@ -28,6 +28,7 @@ const doctors = [
 
 // Crear el método 'get' del directorio '/api/doctors' (recuperar todos los doctores)
 router.get('/', (req, resp) => {
+    
     console.log(req.url)
     // Envía el array doctors
     resp.send(doctors)

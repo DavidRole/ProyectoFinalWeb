@@ -1,4 +1,4 @@
-const doctorSelect = document.getElementById('list');
+const selectDoctor = document.getElementById('list');
 const detailButton = document.getElementById('detail');
 
 
@@ -12,7 +12,7 @@ function fetchDoctors() {
             try {
                 const doctors = JSON.parse(xhr.responseText);
                 console.log('Doctors:', doctors);
-                populateDoctorSelect(doctors);
+                populateDoctorSelect(doctors.doctors);
             } catch (error) {
                 console.error('Error parsing JSON response:', error);
             }
@@ -34,26 +34,16 @@ function populateDoctorSelect(doctors) {
         const option = document.createElement('option');
         option.value = doctor.id;
         option.text = `Dr. ${doctor.name}`;
-        doctorSelect.appendChild(option);
+        selectDoctor.appendChild(option);
     });
 
-    doctorSelect.disabled = false;
+    selectDoctor.disabled = false;
     detailButton.disabled = false;
 }
 
 
-doctorSelect.addEventListener('change', function () {
-    const selectedDoctorId = this.value;
-    if (selectedDoctorId !== 'default') {
-        detailButton.disabled = false;
-    } else {
-        detailButton.disabled = true;
-    }
-});
-
-
 detailButton.addEventListener('click', function () {
-    const selectedDoctorId = doctorSelect.value;
+    const selectedDoctorId = selectDoctor.value;
     if (selectedDoctorId !== 'default') {
       console.log(`Selected doctor ID: ${selectedDoctorId}`);
       window.location.href = `DoctorDetails.html?doctorId=${selectedDoctorId}`;

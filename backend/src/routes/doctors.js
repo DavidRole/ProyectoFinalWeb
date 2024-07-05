@@ -1,4 +1,8 @@
 // Importar el módulo expres mediante un enrutador Router
+const { throws } = require('assert')
+const fs = require('fs')
+const path = require('path')
+const { domainToASCII } = require('url')
 const { Router } = require('express')
 const router = Router()
 
@@ -13,18 +17,15 @@ const utilities = require('./utilities')
 
 // Estructura de almacenamiento
 // doctor(employeeId (int), name (String), specialty (String))
-const doctors = [
-    {
-        id: 1,
-        name: 'Juan Rojas Torres',
-        specialty: 'Psiquiatría'
-    },
-    {
-        id: 2,
-        name: 'María Campos Vega',
-        specialty: 'Geriatría'
+let doctors = [];
+fs.readFile('./routes/doctors.json', "utf-8", (error, data) =>{
+    if(error){
+        console.log("Error leyendo el archivo:", error);
+        return;
     }
-]
+    const jsonArray = JSON.parse(data);
+    doctors = jsonArray;
+});
 
 // Crear el método 'get' del directorio '/api/doctors' (recuperar todos los doctores)
 router.get('/', (req, resp) => {
@@ -76,14 +77,15 @@ router.post('/', (req, resp) => {
     // Se crea el objeto doctor
     const doctor = {
         //id: doctors.length + 1, // autoincremental
-        id: utilities.increase(doctors.length),
+        id: utilities.increase(doctors.doctors.length),
         name: req.body.name,
         specialty: req.body.specialty
     }
 
     // Se agrega el doctor al array
-    doctors.push(doctor)
-
+    console.log(doctors)
+    doctors.doctors.push(doctor)
+    write(doctors.doctors)
     // Se responde el doctor
     resp.send(doctor)
 })
@@ -98,17 +100,29 @@ router.delete('/:id', (req, resp) => {
     // Eliminar el doctor del array
     const index = doctors.indexOf(doctor)
     doctors.splice(index, 1) // Elimina elementos desde el índice señalado
+    write(doctors)
+
     resp.send(doctor)
 
     //FALTA cancelar las citas (no existe el medoto todavia)
 })
 
-// Función de validar información
-function validar(doctor) {
-    const schema = Joi.object({
-        name: Joi.string().min(3).required(),
-        specialty: Joi.string().min(3).required()
+function write(list){
+    var data = JSON.stringify(list, null, 2)
+    
+    console.log(list)
+    console.log(data)
+    
+    
+    // escribir la info en el archivo JSON
+    // recibe
+    // path
+    // datos
+    // callback
+
+    fs.writeFile('./doctors.json', data, (err) => {
+        if (err) throw err;
+        console.log('Archivo Guardado')
     })
 
-    return schema.validate(course)
 }

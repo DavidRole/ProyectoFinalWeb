@@ -13,16 +13,14 @@ const utilities = require('./utilities')
 
 // Estructura de almacenamiento
 // patient (id (int), name (String), birthdate (String), phone (String))
-const patients = [
-    {id: 1,
-    name: 'Tomás Salas Quirós',
-    birthdate: '1998-03-15',
-    phone: '8945-4544'},
-
-    {id: 2,
-    name: 'Marcos Pérez Castro',
-    birthdate: '2001-10-07',
-    phone: '8477-6982'} ]
+let patients = fs.readFile('./routes/patients.json', "utf-8", (error, data) =>{
+  if(error){
+      console.log("Error leyendo el archivo:", error);
+      return;
+  }
+  const jsonArray = JSON.parse(data);
+  patients = jsonArray;
+});
 
 // Crear el método 'get' del directorio '/api/patients' (recuperar todos los pacientes)
 router.get('/', (req, resp) => {

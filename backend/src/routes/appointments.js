@@ -1,40 +1,29 @@
 // Importar el módulo expres mediante un enrutador Router
+const { throws, ifError } = require('assert')
+const fs = require('fs')
+const path = require('path')
+const { domainToASCII } = require('url')
 const { Router } = require('express')
 const router = Router()
 
 // Importar el módulo joi
 const Joi = require('joi')
+const { json } = require('body-parser')
 
 // Exportar los métodos del servidor express (GET, GET/:i, POST, PUT, DELETE)
 module.exports = router
 
-
 // Estructura de almacenamiento
 // appointment (employeeId (int), date (String), patient (int), hour (String), state (String))
-
-// const appointments = readAppointments();
-const appointments = [
-    {
-      employeeId: 1,
-      date: '2024-06-17',
-      patient: 2,
-      hour: '08:00',
-      state: 'active'
-    },
-    {
-      employeeId: 2,
-      date: '2024-06-18',
-      patient: 1,
-      hour: '10:00',
-      state: 'canceled'
-    },
-    {
-      employeeId: 1,
-      date: '2024-06-18',
-      patient: 3,
-      hour: '17:00',
-      state: 'active'
-    }]
+let appointments = [];
+fs.readFile('./routes/appointments.json', "utf-8", (error, data) =>{
+    if(error){
+        console.log("Error leyendo el archivo:", error);
+        return;
+    }
+    const jsonArray = JSON.parse(data);
+    appointments = jsonArray;
+});
 
 // Crear el método 'get' del directorio '/api/appointments' (recuperar todos las citas)
 router.get('/', (req, resp) => {
@@ -74,7 +63,7 @@ router.get('/doctor/:doctorId', (req, resp) => {
     const doctorId = parseInt(req.params.doctorId);
     const doctorAppointments = appointments.filter(appointment => appointment.doctorId === doctorId);
     if (doctorAppointments.length === 0) {
-        resp.status(404).send(`No appointments found for employee ${doctorId}`);
+        resp.status(404).send(`No appointments found for doctor ${doctorId}`);
     } else {
         resp.send(doctorAppointments);
     }
@@ -83,6 +72,7 @@ router.get('/doctor/:doctorId', (req, resp) => {
 
 router.post('/', (req, resp) => {
     // Crear un esquema de validación para el objeto cita (appointment)
+
     const schema = Joi.object({
         employeeId: Joi.number().integer().min(1).required(), // ID del empleado (entero)
         date: Joi.string().isoDate().required(), // Fecha de la cita (formato YYYY-MM-DD)
@@ -113,7 +103,7 @@ router.post('/', (req, resp) => {
 
     // Agregar la cita al array appointments
     appointments.push(appointment);
-
+    writeAppointments(appointments);
     // Enviar una respuesta exitosa con la cita creada
     resp.send(appointment);
 });
@@ -130,14 +120,22 @@ router.delete('/:id', (req, resp) => {
     // Eliminar la cita del array
     const index = appointments.indexOf(appointment)
     appointments.splice(index, 1) // Elimina elementos desde el índice señalado
+
+    writeAppointments(appointments);
+
     resp.send(appointment)
 })
+   
 
-// Función de validar información
-function validar(appointment) {
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
+function writeAppointments(list) {
+    var data = JSON.stringify(list, null, 2)
+
+    console.log(list)
+    console.log(data)
+
+    fs.writeFile('./appointments.json', data, (err) => {
+        if (err) throw err;
+        console.log('Archivo Guardado')
     })
 
-    return schema.validate(appointment)
 }

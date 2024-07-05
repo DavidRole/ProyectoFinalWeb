@@ -6,13 +6,9 @@ function readAppointments() {
     const appointments = JSON.parse(data);
     return appointments;
   } catch (error) {
-    console.error('Error reading appointments:', error);
+    console.log('Error leyendo el archivo:', error);
     return []; // Return empty array on error
   }
 }
 
-// Example usage
-const appointments = readAppointments();
-
-console.log('Appointments:', appointments);
-// Process the appointments array as needed
+module.exports = readAppointments; 

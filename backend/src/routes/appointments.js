@@ -8,27 +8,33 @@ const Joi = require('joi')
 // Exportar los métodos del servidor express (GET, GET/:i, POST, PUT, DELETE)
 module.exports = router
 
-// Importar un clase
-const utilities = require('./utilities')
 
 // Estructura de almacenamiento
 // appointment (employeeId (int), date (String), patient (int), hour (String), state (String))
+
+// const appointments = readAppointments();
 const appointments = [
     {
-        employeeId: 1,
-        date: "2024-06-17",
-        patient: 1,
-        hour: "08:00",
-        state: "active",
+      employeeId: 1,
+      date: '2024-06-17',
+      patient: 2,
+      hour: '08:00',
+      state: 'active'
     },
     {
-        employeeId: 1,
-        date: "2024-06-18",
-        patient: 1,
-        hour: "10:00",
-        state: "canceled",
+      employeeId: 2,
+      date: '2024-06-18',
+      patient: 1,
+      hour: '10:00',
+      state: 'canceled'
     },
-]
+    {
+      employeeId: 1,
+      date: '2024-06-18',
+      patient: 3,
+      hour: '17:00',
+      state: 'active'
+    }]
 
 // Crear el método 'get' del directorio '/api/appointments' (recuperar todos las citas)
 router.get('/', (req, resp) => {
@@ -64,13 +70,13 @@ router.get('/patient/:patientId', (req, resp) => {
     }
 });
 
-router.get('/employee/:employeeId', (req, resp) => {
-    const employeeId = parseInt(req.params.employeeId);
-    const employeeAppointments = appointments.filter(appointment => appointment.employeeId === employeeId);
-    if (employeeAppointments.length === 0) {
-        resp.status(404).send(`No appointments found for employee ${employeeId}`);
+router.get('/doctor/:doctorId', (req, resp) => {
+    const doctorId = parseInt(req.params.doctorId);
+    const doctorAppointments = appointments.filter(appointment => appointment.doctorId === doctorId);
+    if (doctorAppointments.length === 0) {
+        resp.status(404).send(`No appointments found for employee ${doctorId}`);
     } else {
-        resp.send(employeeAppointments);
+        resp.send(doctorAppointments);
     }
 });
 
@@ -78,42 +84,41 @@ router.get('/employee/:employeeId', (req, resp) => {
 router.post('/', (req, resp) => {
     // Crear un esquema de validación para el objeto cita (appointment)
     const schema = Joi.object({
-      employeeId: Joi.number().integer().min(1).required(), // ID del empleado (entero)
-      date: Joi.string().isoDate().required(), // Fecha de la cita (formato YYYY-MM-DD)
-      patient: Joi.number().integer().min(1).required(), // ID del paciente (entero)
-      hour: Joi.string().regex(/^\d{2}:\d{2}$/).required(), // Hora de la cita (formato HH:MM)
-      state: Joi.string().valid('active', 'inactive').required(), // Estado de la cita (activo o inactivo)
+        employeeId: Joi.number().integer().min(1).required(), // ID del empleado (entero)
+        date: Joi.string().isoDate().required(), // Fecha de la cita (formato YYYY-MM-DD)
+        patient: Joi.number().integer().min(1).required(), // ID del paciente (entero)
+        hour: Joi.string().regex(/^\d{2}:\d{2}$/).required(), // Hora de la cita (formato HH:MM)
+        state: Joi.string().valid('active', 'canceled').required(), // Estado de la cita (activa o cancelada)
     });
-  
+
     // Validar el cuerpo de la solicitud contra el esquema
     const { error } = schema.validate(req.body);
-  
+
     if (error) {
-      // Devolver un error 400 Solicitud incorrecta con detalles
-      return resp.status(400).send(error.details[0].message);
+        // Devolver un error 400 Solicitud incorrecta con detalles
+        return resp.status(400).send(error.details[0].message);
     }
-  
+
     // Extraer los datos validados de la cita
     const { employeeId, date, patient, hour, state } = req.body;
-  
+
     // Crear el objeto cita (appointment)
     const appointment = {
-      id: utilities.increase(appointments.length), // Suponiendo que utilities.increase genera IDs únicos
-      employeeId: parseInt(employeeId), // Convertir a entero
-      date,
-      patient: parseInt(patient), // Convertir a entero
-      hour,
-      state,
+        employeeId: parseInt(employeeId), // Convertir a entero
+        date,
+        patient: parseInt(patient), // Convertir a entero
+        hour,
+        state,
     };
-  
+
     // Agregar la cita al array appointments
     appointments.push(appointment);
-  
+
     // Enviar una respuesta exitosa con la cita creada
     resp.send(appointment);
-  });
-  
-  
+});
+
+
 
 // Crear el método 'delete' del directorio '/api/appointments'
 // Elimina un elemento recibido por parámetros
@@ -123,7 +128,7 @@ router.delete('/:id', (req, resp) => {
     if (!appointment) return resp.status(404).send(`No se encontró la cita con el id ${req.params.id}`)
 
     // Eliminar la cita del array
-    const index = appointments.indexOf(course)
+    const index = appointments.indexOf(appointment)
     appointments.splice(index, 1) // Elimina elementos desde el índice señalado
     resp.send(appointment)
 })
@@ -134,5 +139,5 @@ function validar(appointment) {
         name: Joi.string().min(3).required()
     })
 
-    return schema.validate(course)
+    return schema.validate(appointment)
 }

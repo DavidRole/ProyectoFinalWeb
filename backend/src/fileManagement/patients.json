@@ -1,0 +1,22 @@
+{
+  "patients": [
+    {
+      "id": 1,
+      "name": "Tomás Salas Quirós",
+      "birthdate": "1998-03-15",
+      "phone": "8945-4544"
+    },
+    {
+      "id": 2,
+      "name": "Marcos Pérez Castro",
+      "birthdate": "2001-10-07",
+      "phone": "8477-6982"
+    },
+    {
+      "id": 3,
+      "name": "Juan Ayuso Perez",
+      "birthdate": "2006-11-07",
+      "phone": "8888-8888"
+    }
+  ]
+}

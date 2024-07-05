@@ -19,7 +19,7 @@ const patients = [
     birthdate: '1998-03-15',
     phone: '8945-4544'},
 
-    {id: 110520366,
+    {id: 2,
     name: 'Marcos Pérez Castro',
     birthdate: '2001-10-07',
     phone: '8477-6982'} ]

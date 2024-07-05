@@ -14,7 +14,7 @@ const utilities = require('./utilities')
 // Estructura de almacenamiento
 // patient (id (int), name (String), birthdate (String), phone (String))
 const patients = [
-    {id: 207850965,
+    {id: 1,
     name: 'Tomás Salas Quirós',
     birthdate: '1998-03-15',
     phone: '8945-4544'},

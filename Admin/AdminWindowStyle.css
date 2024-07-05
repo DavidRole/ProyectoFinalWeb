@@ -101,6 +101,8 @@ iframe {
     background-color: #333;
     border-radius: 7px;
     color: white;
+    font-weight: 500;
+    font-size: medium;
     padding: 10px;
     border-right: 3px solid #dbdbdb;
 }

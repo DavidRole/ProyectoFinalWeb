@@ -30,32 +30,31 @@ const appointments = [
     },
 ]
 
-// Crear el método 'get' del directorio '/api/courses' (recuperar todos los cursos)
+// Crear el método 'get' del directorio '/api/appointments' (recuperar todos las citas)
 router.get('/', (req, resp) => {
     console.log(req.url)
     //leer 
-    // Envía el array courses
-    resp.send(courses)
+    // Envía el array appointments 
+    resp.send(appointments)
 })
 
-// Crear el método 'get' del directorio '/api/courses' pero solo un elemento
+// Crear el método 'get' del directorio '/api/appointments' pero solo un elemento
 // Se envían parámetros, para ello se envía el atributo en la url, con : y nombre (:id)
-// /api/courses/:id
+// /api/appointments/:id
 router.get('/:id', (req, resp) => {
-    console.log(req.url)
-    // Debe obtener el parámetro de entrada req (req.params.id)
-    // El parámetro se recibe como String y debe convertirse a int (parseInt)
-    // Se busca con la función find del array
-    // Pasa un objeto y al objeto le asignamos la propiedad id
-    const course = courses.find(c => c.id === parseInt(req.params.id))
-    console.log(course)
-    // Si el curso no existe retornamos el estado 404
-    if (!course) return resp.status(404).send(`El curso con el id ${req.params.id} no existe`)
-    // Retornar el curso
-    resp.send(course)
-})
+    console.log(req.url);
+    const index = appointments.findIndex(c => c.id === parseInt(req.params.id));
+    if (index !== -1) {
+      const appointment = appointments[index];
+      console.log(appointment);
+      resp.send(appointment);
+    } else {
+      // el retorno en caso de que no se encuentre la cita solicitada
+      resp.status(404).send(`No se encontró la cita con el id ${req.params.id}`);
+    }
+  });
 
-// Crear el método 'post' para el directorio '/api/courses'
+// Crear el método 'post' para el directorio '/api/appointments'
 // La información se recibe en el body
 router.post('/', (req, resp) => {
     // Validar que el nombre esté presente y sea de almenos 3 caracteres
@@ -66,7 +65,11 @@ router.post('/', (req, resp) => {
     // Crear un esquema de validación (Joi.object)
     // Definir reglas para cada campo
     const schema = Joi.object({
-        name: Joi.string().min(3).required()
+        name: Joi.string().min(3).required(),
+        date: Joi.string().min(3).required(), 
+        patient: Joi.string().min(3).required(),
+        state: Joi.string().min(3).required()
+
     })
 
     // Llama al método de validar la información (validate)
@@ -78,54 +81,35 @@ router.post('/', (req, resp) => {
     if (error) return resp.status(400).send(error.details[0].message)
 
     // Se crea el objeto curso
-    const course = {
+    const appointment = {
         //id: courses.length + 1, // autoincremental
-        id: utilities.increase(courses.length),
+        id: utilities.increase(appointments.length),
         name: req.body.name
     }
 
     // Se agrega el curso al array
-    courses.push(course)
+    appointments.push(course)
     //lea el array y lo convierta en json
 
     // Se responde el curso
-    resp.send(course)
+    resp.send(appointment)
 })
 
-// Crear el método 'put' del directorio '/api/courses/:id'
-// Recibe id por parámetro
-router.put('/:id', (req, resp) => {
-    // Se busca el curso en el array
-    const course = courses.find(c => c.id === parseInt(req.params.id))
-    // Si no encuentra el curso retorna 404
-    if (!course) return resp.status(404).send(`El curso con el id ${req.params.id} no existe`)
-
-    // Validar error llamando a un función 'validar'
-    const { error } = validar(req.body)
-
-    // Si hay error retorna el detalle
-    if (error) return resp.status(400).send(error.details[0].message)
-
-    // Si no hay error lo cambia
-    course.name = req.body.name
-    resp.send(course)
-})
-
-// Crear el método 'delete' del directorio '/api/courses'
+// Crear el método 'delete' del directorio '/api/appointments'
 // Elimina un elemento recibido por parámetros
 router.delete('/:id', (req, resp) => {
-    // Buscar el curso
-    const course = courses.find(c => c.id === parseInt(req.params.id))
-    if (!course) return resp.status(404).send(`No se encontró el curso con el id ${req.params.id}`)
+    // Buscar la cita
+    const appointment = appointments.find(c => c.id === parseInt(req.params.id))
+    if (!appointment) return resp.status(404).send(`No se encontró la cita con el id ${req.params.id}`)
 
-    // Eliminar el curso del array
-    const index = courses.indexOf(course)
-    courses.splice(index, 1) // Elimina elementos desde el índice señalado
-    resp.send(course)
+    // Eliminar la cita del array
+    const index = appointments.indexOf(course)
+    appointments.splice(index, 1) // Elimina elementos desde el índice señalado
+    resp.send(appointment)
 })
 
 // Función de validar información
-function validar(course) {
+function validar(appointment) {
     const schema = Joi.object({
         name: Joi.string().min(3).required()
     })

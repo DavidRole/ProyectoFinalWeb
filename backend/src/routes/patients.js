@@ -35,18 +35,17 @@ router.get('/', (req, resp) => {
 // Se envían parámetros, para ello se envía el atributo en la url, con : y nombre (:id)
 // /api/patients/:id
 router.get('/:id', (req, resp) => {
-    console.log(req.url)
-    // Debe obtener el parámetro de entrada req (req.params.id)
-    // El parámetro se recibe como String y debe convertirse a int (parseInt)
-    // Se busca con la función find del array
-        // Pasa un objeto y al objeto le asignamos la propiedad id
-    const patient = patients.find(c => c.id === parseInt(req.params.id))
-    console.log(patient)
-    // Si el cliente no existe retornamos el estado 404
-    if (!patient) return resp.status(404).send(`El paciente con el id ${req.params.id} no existe`)
-    // Retornar el cliente
-    resp.send(patient)
-})
+    console.log(req.url);
+    const index = patients.findIndex(c => c.id === parseInt(req.params.id));
+    if (index !== -1) {
+      const patient = patients[index];
+      console.log(patient);
+      resp.send(patient);
+    } else {
+      // el retorno en caso de que no se encuentre el pacinte solicitado
+      resp.status(404).send(`No se encontró el paciente con el id ${req.params.id}`);
+    }
+  });
 
 // Crear el método 'put' del directorio '/api/patients/:id'
 // Recibe id por parámetro

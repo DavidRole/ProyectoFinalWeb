@@ -16,13 +16,18 @@ app.set('json spaces', 2) // Formato de JSON
 app.set('port', process.env.port || 3000)
 
 // Importar las rutas
+const doctorsRouter = require('./routes/doctors')
+const patientsRouter = require('./routes/patients');
+const appointmentsRouter = require('./routes/appointments');
+
+// Importar las rutas
 app.use(require('./routes/index'))
-app.use('/api/courses', require('./routes/courses')),
-app.use('/api/doctors', require('./routes/doctors')),
-app.use('/api/patients', require('./routes/patients'))
+app.use('/api/doctors', doctorsRouter);
+app.use('/api/patients', patientsRouter);
+app.use('/api/appointments', appointmentsRouter);
 
 
-// Iniciar la app
+// Iniciar la aplicación
 app.listen(app.get('port'), () => {
     console.log(`Listening on port ${app.get('port')}`)
-})  
+})

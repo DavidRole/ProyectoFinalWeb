@@ -15,20 +15,19 @@ const utilities = require('./utilities')
 // doctor(employeeId (int), name (String), specialty (String))
 const doctors = [
     {
-        employeeId: 1,
+        id: 1,
         name: 'Juan Rojas Torres',
         specialty: 'Psiquiatría'
-        },
-        {
-        employeeId: 2,
+    },
+    {
+        id: 2,
         name: 'María Campos Vega',
         specialty: 'Geriatría'
-        }
+    }
 ]
 
 // Crear el método 'get' del directorio '/api/doctors' (recuperar todos los doctores)
 router.get('/', (req, resp) => {
-    
     console.log(req.url)
     // Envía el array doctors
     resp.send(doctors)
@@ -38,18 +37,18 @@ router.get('/', (req, resp) => {
 // Se envían parámetros, para ello se envía el atributo en la url, con : y nombre (:id)
 // /api/doctors/:id
 router.get('/:id', (req, resp) => {
-    console.log(req.url)
-    // Debe obtener el parámetro de entrada req (req.params.id)
-    // El parámetro se recibe como String y debe convertirse a int (parseInt)
-    // Se busca con la función find del array
-        // Pasa un objeto y al objeto le asignamos la propiedad id
-    const doctor = doctors.find(c => c.id === parseInt(req.params.id))
-    console.log(doctor)
-    // Si el doctor no existe retornamos el estado 404
-    if (!doctor) return resp.status(404).send(`El doctor con el id ${req.params.id} no existe`)
-    // Retornar el doctor
-    resp.send(doctor)
-})
+    console.log(req.url);
+    const index = doctors.findIndex(c => c.id === parseInt(req.params.id));
+    if (index !== -1) {
+      const doctor = doctors[index];
+      console.log(doctor);
+      resp.send(doctor);
+    } else {
+      // el retorno en caso de que no se encuentre el doctor solicitado
+      resp.status(404).send(`No se encontró el doctor con el id ${req.params.id}`);
+    }
+  });
+  
 
 // Crear el método 'post' para el directorio '/api/doctor'
 // La información se recibe en el body
@@ -95,7 +94,7 @@ router.delete('/:id', (req, resp) => {
     // Buscar el doctor
     const doctor = doctors.find(c => c.id === parseInt(req.params.id))
     if (!doctor) return resp.status(404).send(`No se encontró el doctor con el id ${req.params.id}`)
-    
+
     // Eliminar el doctor del array
     const index = doctors.indexOf(doctor)
     doctors.splice(index, 1) // Elimina elementos desde el índice señalado

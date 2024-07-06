@@ -1,4 +1,8 @@
 // Importar el módulo expres mediante un enrutador Router
+const { throws } = require('assert')
+const fs = require('fs')
+const path = require('path')
+const { domainToASCII } = require('url')
 const { Router } = require('express')
 const router = Router()
 

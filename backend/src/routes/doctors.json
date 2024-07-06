@@ -1,19 +1,22 @@
-{
-  "doctors": [
-    {
-      "id": 1,
-      "name": "Juan Rojas Torres",
-      "specialty": "Psiquiatría"
-    },
-    {
-      "id": 2,
-      "name": "María Campos Vega",
-      "specialty": "Geriatría"
-    },
-    {
-      "id": 3,
-      "name": "Juanita San Juan",
-      "specialty": "Internismo"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "name": "Juan Rojas Torres",
+    "specialty": "Psiquiatría"
+  },
+  {
+    "id": 2,
+    "name": "María Campos Vega",
+    "specialty": "Geriatría"
+  },
+  {
+    "id": 3,
+    "name": "Juanita San Juan",
+    "specialty": "Internismo"
+  },
+  {
+    "id": 4,
+    "name": "Isaac Figueroa",
+    "specialty": "Oncología"
+  }
+]

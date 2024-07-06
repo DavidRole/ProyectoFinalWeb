@@ -12,7 +12,7 @@ function fetchDoctors() {
             try {
                 const doctors = JSON.parse(xhr.responseText);
                 console.log('Doctors:', doctors);
-                populateDoctorSelect(doctors.doctors);
+                fillDoctorSelect(doctors.doctors);
             } catch (error) {
                 console.error('Error parsing JSON response:', error);
             }
@@ -28,7 +28,7 @@ function fetchDoctors() {
     xhr.send();
 }
 
-function populateDoctorSelect(doctors) {
+function fillDoctorSelect(doctors) {
     console.log('Populating doctor select...');
     doctors.forEach(doctor => {
         const option = document.createElement('option');

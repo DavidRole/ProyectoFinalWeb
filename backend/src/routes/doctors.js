@@ -120,7 +120,7 @@ function write(list){
     // datos
     // callback
 
-    fs.writeFile('./doctors.json', data, (err) => {
+    fs.writeFile('./routes/doctors.json', data, (err) => {
         if (err) throw err;
         console.log('Archivo Guardado')
     })

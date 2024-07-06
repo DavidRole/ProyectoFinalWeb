@@ -133,7 +133,7 @@ function writeAppointments(list) {
     console.log(list)
     console.log(data)
 
-    fs.writeFile('./appointments.json', data, (err) => {
+    fs.writeFile('./routes/appointments.json', data, (err) => {
         if (err) throw err;
         console.log('Archivo Guardado')
     })

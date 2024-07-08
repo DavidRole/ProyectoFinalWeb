@@ -1,31 +1,33 @@
-const selectDoctor = document.getElementById('list');
-const detailButton = document.getElementById('detail');
+document.addEventListener('DOMContentLoaded', () => {
+    const selectDoctor = document.getElementById('list');
+    const detailButton = document.getElementById('detail');
 
-executeRequest('get', 'http://127.0.0.1:3000/api/doctors/', (doctors) => {
-    console.log('Doctors:', doctors);
-    fillDoctorSelect(doctors);
-})
+    executeRequest('get', 'http://127.0.0.1:3000/api/doctors/', (doctors) => {
+        console.log('Doctors:', doctors);
+        fillDoctorSelect(doctors);
+    })
 
-function fillDoctorSelect(doctors) {
-    console.log('Populating doctor select...');
-    doctors.doctors.forEach(doctor => {
-        const option = document.createElement('option');
-        option.value = doctor.id;
-        option.text = `Dr. ${doctor.name}`;
-        selectDoctor.appendChild(option);
+    function fillDoctorSelect(doctors) {
+        console.log('Populating doctor select...');
+        doctors.forEach(doctor => {
+            const option = document.createElement('option');
+            option.value = doctor.id;
+            option.text = `Dr. ${doctor.name}`;
+            selectDoctor.appendChild(option);
+        });
+    }
+
+
+    detailButton.addEventListener('click', function () {
+        const selectedDoctorId = selectDoctor.value;
+        if (selectedDoctorId !== 'default') {
+            console.log(`Selected doctor ID: ${selectedDoctorId}`);
+            window.location.href = `DoctorDetails.html?doctorId=${selectedDoctorId}`;
+        } else {
+            console.error('No doctor selected');
+        }
     });
-}
-
-
-// detailButton.addEventListener('click', function () {
-//     const selectedDoctorId = selectDoctor.value;
-//     if (selectedDoctorId !== 'default') {
-//         console.log(`Selected doctor ID: ${selectedDoctorId}`);
-//         window.location.href = `DoctorDetails.html?doctorId=${selectedDoctorId}`;
-//     } else {
-//         console.error('No doctor selected');
-//     }
-// });
+});
 
 function executeRequest(method, url, handleOk, handleError, data, context) {
     const xhr = new XMLHttpRequest();

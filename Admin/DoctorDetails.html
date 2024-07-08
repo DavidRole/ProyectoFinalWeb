@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>clinicaFigueres.com</title>
     <link rel="stylesheet" href="DoctorDetailsStyle.css">
+    <script src="DoctorDetails.js"></script>
 </head>
 
 <body>
@@ -23,11 +24,23 @@
     <div class="mainbody">
 
         <div class="doctorDetails">
-            
+            <table class="table" id="appointments-table">
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Telefono</th>
+                        <th>Hora</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="appointments-tbody">
+                </tbody>
+            </table>
         </div>
 
         <div class="buttonSchedule">
-            <button class="buttons">
+            <button class="buttons" id="cancelAll" onclick="" >
                 <label for="buttons">Cancelar Todas las Citas</label>
             </button>
         </div>

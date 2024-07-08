@@ -12,7 +12,7 @@ function fetchDoctors() {
             try {
                 const doctors = JSON.parse(xhr.responseText);
                 console.log('Doctors:', doctors);
-                fillDoctorSelect(doctors.doctors);
+                fillDoctorSelect(doctors);
             } catch (error) {
                 console.error('Error parsing JSON response:', error);
             }

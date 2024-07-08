@@ -12,12 +12,10 @@ const Joi = require('joi')
 // Exportar los métodos del servidor express (GET, GET/:i, POST, PUT, DELETE)
 module.exports = router
 
-// Importar un clase
-const utilities = require('./utilities')
-
 // Estructura de almacenamiento
 // patient (id (int), name (String), birthdate (String), phone (String))
-let patients = fs.readFile('./routes/patients.json', "utf-8", (error, data) =>{
+let patients = []
+fs.readFile('./routes/patients.json', "utf-8", (error, data) =>{
   if(error){
       console.log("Error leyendo el archivo:", error);
       return;
@@ -36,18 +34,25 @@ router.get('/', (req, resp) => {
 // Crear el método 'get' del directorio '/api/patients' pero solo un elemento
 // Se envían parámetros, para ello se envía el atributo en la url, con : y nombre (:id)
 // /api/patients/:id
-router.get('/:id', (req, resp) => {
-    console.log(req.url);
-    const index = patients.findIndex(c => c.id === parseInt(req.params.id));
-    if (index !== -1) {
-      const patient = patients[index];
-      console.log(patient);
-      resp.send(patient);
-    } else {
-      // el retorno en caso de que no se encuentre el pacinte solicitado
-      resp.status(404).send(`No se encontró el paciente con el id ${req.params.id}`);
-    }
-  });
+router.get('/:id', (req, res) => {
+  console.log(req.url);
+  
+  const id = parseInt(req.params.id);
+  
+  if (isNaN(id)) {
+    return res.status(400).send('Invalid patient ID. ID must be a number.');
+  }
+
+  const patient = patients.patients.find(patient => patient.id === id);
+ 
+  if (!patient) {
+    res.status(404).send(`No patient found with ID ${id}`);
+  }
+
+  res.send(patient); 
+ 
+});
+
 
 // Crear el método 'put' del directorio '/api/patients/:id'
 // Recibe id por parámetro

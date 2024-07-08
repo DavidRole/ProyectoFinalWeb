@@ -16,8 +16,8 @@ module.exports = router
 // Estructura de almacenamiento
 // appointment (employeeId (int), date (String), patient (int), hour (String), state (String))
 let appointments = [];
-fs.readFile('./routes/appointments.json', "utf-8", (error, data) =>{
-    if(error){
+fs.readFile('./routes/appointments.json', "utf-8", (error, data) => {
+    if (error) {
         console.log("Error leyendo el archivo:", error);
         return;
     }
@@ -27,44 +27,49 @@ fs.readFile('./routes/appointments.json', "utf-8", (error, data) =>{
 
 // Crear el método 'get' del directorio '/api/appointments' (recuperar todos las citas)
 router.get('/', (req, resp) => {
+
     console.log(req.url)
     //leer 
     // Envía el array appointments 
     resp.send(appointments)
 })
 
-// Crear el método 'get' del directorio '/api/appointments' pero solo un elemento
-// Se envían parámetros, para ello se envía el atributo en la url, con : y nombre (:id)
-// /api/appointments/:id
-router.get('/:id', (req, resp) => {
-    console.log(req.url);
-    const index = appointments.findIndex(c => c.id === parseInt(req.params.id));
-    if (index !== -1) {
-        const appointment = appointments[index];
-        console.log(appointment);
-        resp.send(appointment);
-    } else {
-        // el retorno en caso de que no se encuentre la cita solicitada
-        resp.status(404).send(`No se encontró la cita con el id ${req.params.id}`);
-    }
-});
 
 router.get('/patient/:patientId', (req, resp) => {
+
     const patientId = parseInt(req.params.patientId);
-    const patientAppointments = appointments.filter(appointment => appointment.patient === patientId);
+    const patientAppointments = []
+
+    appointments.appointments.forEach(element => {
+        if (element.patient === patientId) {
+            patientAppointments.push(element)
+        }
+    });
+
     if (patientAppointments.length === 0) {
-        resp.status(404).send(`No appointments found for patient ${patientId}`);
+        console.log(`No appointments found for patient ${patientId}`)
+        resp.status(404);
     } else {
         resp.send(patientAppointments);
     }
 });
 
 router.get('/doctor/:doctorId', (req, resp) => {
+
     const doctorId = parseInt(req.params.doctorId);
-    const doctorAppointments = appointments.filter(appointment => appointment.doctorId === doctorId);
+    const doctorAppointments = []
+
+    appointments.appointments.forEach(element => {
+        if (element.employeeId === doctorId) {
+            doctorAppointments.push(element)
+        }
+    });
+
     if (doctorAppointments.length === 0) {
-        resp.status(404).send(`No appointments found for doctor ${doctorId}`);
+        console.log(`No appointments found for doctor ${doctorId}`)
+        resp.status(404);
     } else {
+        console.log(doctorAppointments)
         resp.send(doctorAppointments);
     }
 });
@@ -102,30 +107,58 @@ router.post('/', (req, resp) => {
     };
 
     // Agregar la cita al array appointments
-    appointments.push(appointment);
+    appointments.appointments.push(appointment);
     writeAppointments(appointments);
-    // Enviar una respuesta exitosa con la cita creada
+
     resp.send(appointment);
+});
+
+router.delete('/:doctorId/:patientId', (req, res) => {
+
+    const docId = parseInt(req.params.doctorId);
+    const patientId = parseInt(req.params.patientId);
+
+    const appointmentIndex = appointments.appointments.findIndex(element => {
+        return element.employeeId === docId && element.patient === patientId;
+    });
+
+    if (appointmentIndex === -1) {
+        return res.status(404).send('Cita no encontrada');
+    }
+
+
+    appointments.appointments[appointmentIndex].state = 'canceled';
+
+    writeAppointments(appointments);
+
+    res.status(200).send('Cita cancelada con éxito');
+});
+
+
+router.delete('/:doctorId', (req, res) => {
+
+    const docId = parseInt(req.params.doctorId);
+
+    // Filter appointments to keep only non-canceled ones for other doctors
+    let count = 0;
+    appointments.appointments.forEach(element => {
+        if (element.employeeId === docId) {
+            element.state = 'canceled';
+            count++;
+        }
+    });
+    if (count === 0) {
+        return res.status(404).send('Doctor sin citas asociadas');
+    }
+
+    // Update appointments data
+    writeAppointments(appointments);
+
+    res.status(200).send('Citas canceladas con éxito'); // Message can be improved
 });
 
 
 
-// Crear el método 'delete' del directorio '/api/appointments'
-// Elimina un elemento recibido por parámetros
-router.delete('/:id', (req, resp) => {
-    // Buscar la cita
-    const appointment = appointments.find(c => c.id === parseInt(req.params.id))
-    if (!appointment) return resp.status(404).send(`No se encontró la cita con el id ${req.params.id}`)
-
-    // Eliminar la cita del array
-    const index = appointments.indexOf(appointment)
-    appointments.splice(index, 1) // Elimina elementos desde el índice señalado
-
-    writeAppointments(appointments);
-
-    resp.send(appointment)
-})
-   
 
 function writeAppointments(list) {
     var data = JSON.stringify(list, null, 2)

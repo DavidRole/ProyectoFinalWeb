@@ -139,3 +139,33 @@ iframe {
     justify-content: space-evenly;
     padding: 40px 0 40px 0;
 }
+
+table {
+    font-size: large;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    border-collapse: collapse;
+    border-radius: 8px;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+}
+
+.table thead th {
+    border-radius: 8px;
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #333;
+    color: #ffffff;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+

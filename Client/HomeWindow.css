@@ -81,8 +81,93 @@ nav {
     color: #252422;
 }
 
+.buttons {
+    margin: 40px 0px 20px 0px;
+    height: 50px;
+    max-width: 0 auto;
+    border-radius: 10px;
+    color: #9e9e9e;
+    background-color: transparent;
+    border: 2px solid #9e9e9e;
+    transition: 0.3s;
+}
+
+.buttons label {
+    text-size-adjust: auto;
+    font-weight: 500;
+    font-size: large;
+}
+
+.buttons:hover {
+    background-color: rgb(167, 17, 47);
+    color: #252422;
+    border-color: rgb(167, 17, 47);
+}
+
 iframe{
     width: 100%;
     height: 270px;
 }
 
+.user{
+    padding: 20px;
+    display: grid;
+    gap: 24px;
+    padding-inline: 24px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.userInfo{
+    background-color: #333;
+    border-radius: 8px;
+    border: solid 1.5px #333;
+    color: #ffffff;
+    display: grid;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#info{
+    justify-content: left;
+    font-size: large;
+}
+
+.patientDetails {
+    margin-top: 50px;
+    padding: 20px;
+    display: flex;
+    gap: 24px;
+    padding-inline: 24px;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 40px 0 40px 0;
+}
+
+table {
+    font-size: large;
+    width: 700px;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    border-collapse: collapse;
+    border-radius: 8px;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+}
+
+.table thead th {
+    border-radius: 8px;
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #333;
+    color: #ffffff;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}

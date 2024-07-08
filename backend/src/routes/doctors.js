@@ -77,15 +77,15 @@ router.post('/', (req, resp) => {
     // Se crea el objeto doctor
     const doctor = {
         //id: doctors.length + 1, // autoincremental
-        id: utilities.increase(doctors.doctors.length),
+        id: utilities.increase(doctors.length),
         name: req.body.name,
         specialty: req.body.specialty
     }
 
     // Se agrega el doctor al array
     console.log(doctors)
-    doctors.doctors.push(doctor)
-    write(doctors.doctors)
+    doctors.push(doctor)
+    write(doctors)
     // Se responde el doctor
     resp.send(doctor)
 })

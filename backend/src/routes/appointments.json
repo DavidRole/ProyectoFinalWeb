@@ -20,6 +20,13 @@
       "patient": 3,
       "hour": "17:00",
       "state": "canceled"
+    },
+    {
+      "employeeId": 5,
+      "date": "2024-07-18",
+      "patient": 504580037,
+      "hour": "17:00",
+      "state": "canceled"
     }
   ]
 }

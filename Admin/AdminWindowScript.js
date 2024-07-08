@@ -38,11 +38,11 @@ function fillDoctorSelect(doctors) {
     });
 
     selectDoctor.disabled = false;
-    detailButton.disabled = false;
+    loginButton.disabled = false;
 }
 
 
-detailButton.addEventListener('click', function () {
+loginButton.addEventListener('click', function () {
     const selectedDoctorId = selectDoctor.value;
     if (selectedDoctorId !== 'default') {
       console.log(`Selected doctor ID: ${selectedDoctorId}`);

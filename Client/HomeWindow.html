@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>clinicaFigueres.com</title>
     <link rel="stylesheet" href="HomeWindow.css">
+    <script src="HomeWindow.js"></script>
 </head>
 
 <body>
@@ -28,17 +29,29 @@
         <div class="user">
             <section class="userInfo">
                 <h2>Informacion personal</h2>
-                <li id="info">
-                
-                </li>
-            </section>
+                <p id="info">
 
-            <section class="appointments">
-                <div id="table">
-                    
-                </div>
+                </p>
             </section>
+            <div class="patientsDetails">
+                <table class="table" id="appointments-table">
+                    <thead>
+                        <tr>
+                            <th>Doctor</th>
+                            <th>Especialidad</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointments-tbody">
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+
         <iframe src="Footer.html" frameborder="0"></iframe>
     </div>
 </body>

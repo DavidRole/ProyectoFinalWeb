@@ -18,5 +18,10 @@
     "id": 4,
     "name": "Isaac Figueroa",
     "specialty": "Oncología"
+  },
+  {
+    "id": 5,
+    "name": "Criss Elena Rodriguez",
+    "specialty": "Geriatría"
   }
 ]

@@ -2,7 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const patientId = new URLSearchParams(window.location.search).get('patientId');
     const patientInfo = document.getElementById('info');
     const appointmentsTbody = document.getElementById('appointments-tbody');
+    const links = document.querySelectorAll('.menulinks a'); 
 
+    links.forEach(link => {
+        const url = new URL(link.href); 
+        url.searchParams.set('patientId', patientId); 
+        link.href = url.toString(); 
+    });
+    
     executeRequest('get', `http://127.0.0.1:3000/api/patients/${patientId}`, (patient) => {
         if (patient) {
             const infoString = `
@@ -16,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             patientInfo.innerHTML = 'No hay datos de paciente para cargar';
         }
     }, () => {
-        patientInfo.innerHTML = 'Error: No se pudo cargar la información del paciente';
+        patientInfo.innerHTML = 'Error: Conección caída, no se pudo cargar la información del paciente';
     });
 
 

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Nombre: ${patient.name} <br>
             ID: ${patient.id} <br>
             Fecha de Nacimiento: ${patient.birthdate} <br>
-            Teléfono: ${patient.phoneNumber}
+            Teléfono: ${patient.phone}
           `;
             patientInfo.innerHTML = infoString;
         } else {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const row = document.createElement('tr');
                     row.innerHTML = ` 
                     <td>${doctor.name}</td>
-                    <td>${doctor.speciality}</td>
+                    <td>${doctor.specialty}</td>
                     <td>${appointment.date}</td>
                     <td>${appointment.hour}</td>
                     <td style="background-color: ${appointment.state === 'active' ? 'green' : 'red'}">${appointment.state}</td>

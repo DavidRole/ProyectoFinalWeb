@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         doctors.forEach(doctor => {
             const option = document.createElement('option');
             option.value = doctor.id;
-            option.text = `Dr. ${doctor.name} ${doctor.speciality}`;
+            option.text = `Dr. ${doctor.name} ${doctor.specialty}`;
             selectDoctor.appendChild(option);
         });
     }

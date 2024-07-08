@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const row = document.createElement('tr');
                     row.innerHTML = ` 
                     <td>${doctor.name}</td>
-                    <td>${doctor.number}</td>
+                    <td>${doctor.speciality}</td>
                     <td>${appointment.date}</td>
                     <td>${appointment.hour}</td>
                     <td style="background-color: ${appointment.state === 'active' ? 'green' : 'red'}">${appointment.state}</td>

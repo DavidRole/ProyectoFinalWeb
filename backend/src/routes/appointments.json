@@ -5,7 +5,7 @@
       "date": "2024-06-17",
       "patient": 2,
       "hour": "08:00",
-      "state": "canceled"
+      "state": "active"
     },
     {
       "employeeId": 2,
@@ -19,27 +19,34 @@
       "date": "2024-06-18",
       "patient": 3,
       "hour": "17:00",
-      "state": "canceled"
+      "state": "active"
     },
     {
       "employeeId": 5,
       "date": "2024-07-18",
       "patient": 504580037,
       "hour": "17:00",
-      "state": "canceled"
+      "state": "active"
     },
     {
       "employeeId": 4,
       "date": "2024-07-17",
       "patient": 504580037,
       "hour": "15:00",
-      "state": "active"
+      "state": "canceled"
     },
     {
       "employeeId": 4,
       "date": "2024-07-12",
       "patient": 2,
       "hour": "18:00",
+      "state": "canceled"
+    },
+    {
+      "employeeId": 2,
+      "date": "2024-07-10",
+      "patient": 2,
+      "hour": "09:00",
       "state": "canceled"
     }
   ]

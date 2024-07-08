@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectDoctor = document.getElementById('list');
     const scheduleBt = document.getElementById('schedule');
     const dateInput = document.getElementById('date');
+    const timeInput = document.getElementById('time');
     const currentDate = new Date();
     const minDateISO = currentDate.toISOString().substring(0, 10);
 
@@ -29,19 +30,33 @@ document.addEventListener('DOMContentLoaded', () => {
             selectDoctor.appendChild(option);
         });
     }
+
+    scheduleBt.addEventListener('click', function () {
+        const selectedDoctorId = selectDoctor.value;
+        const date = dateInput.value;
+        const time = timeInput.value;
+
+        // Basic validation (can be extended)
+        if (selectedDoctorId === 'default' || date === '' || time === null) {
+            alert('Por favor, complete todos los campos obligatorios');
+            return; // Prevent sending request if data is invalid
+        }
+
+        const appointmentData = JSON.stringify({
+            employeeId: selectedDoctorId,
+            date: date,
+            patient: patientId,
+            hour: time,
+            state: "active"
+        });
+
+        executeRequest('post', 'http://127.0.0.1:3000/api/appointments', () => {
+            alert('Cita agendada correctamente')
+        }, () => {
+            alert('No se pudo agendar la cita')
+        }, appointmentData)
+    });
 });
-
-
-
-// scheduleBt.addEventListener('click', function () {
-//     const selectedDoctorId = selectDoctor.value;
-//     if (selectedDoctorId !== 'default') {
-//         console.log(`Selected doctor ID: ${selectedDoctorId}`);
-//         window.location.href = `DoctorDetails.html?doctorId=${selectedDoctorId}`;
-//     } else {
-//         console.error('No doctor selected');
-//     }
-// });
 
 function executeRequest(method, url, handleOk, handleError, data, context) {
     const xhr = new XMLHttpRequest();

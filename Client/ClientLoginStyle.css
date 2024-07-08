@@ -11,7 +11,7 @@ body {
     background: #252422;
 }
 
-header{
+header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +19,7 @@ header{
     margin-top: 0;
 }
 
-.logoClinica{
+.logoClinica {
     max-width: 110px;
     max-height: 85px;
 }
@@ -57,7 +57,7 @@ nav {
     z-index: 4;
 }
 
-.logo a{
+.logo a {
     font-weight: 500;
     color: #9e9e9e;
     padding: 8px 16px;
@@ -65,7 +65,7 @@ nav {
     transition: 0.2s;
 }
 
-.logo a:hover{
+.logo a:hover {
     margin-left: 10px;
     margin-right: 20px;
     background-color: white;
@@ -95,7 +95,7 @@ nav {
     padding-inline: 24px;
 }
 
-.menulinks a {
+.menulinks a, p{
     font-weight: 500;
     color: #9e9e9e;
     padding: 8px 16px;
@@ -168,13 +168,13 @@ nav {
     transition: 0.3s;
 }
 
-.button:active{
+.button:active {
     background-color: lightgreen;
     color: #252422;
     border-color: lightgreen;
 }
 
-iframe{
+iframe {
     width: 100%;
     height: 270px;
 }

@@ -27,6 +27,20 @@
       "patient": 504580037,
       "hour": "17:00",
       "state": "canceled"
+    },
+    {
+      "employeeId": 4,
+      "date": "2024-07-17",
+      "patient": 504580037,
+      "hour": "15:00",
+      "state": "active"
+    },
+    {
+      "employeeId": 4,
+      "date": "2024-07-12",
+      "patient": 2,
+      "hour": "18:00",
+      "state": "canceled"
     }
   ]
 }

@@ -23,5 +23,10 @@
     "id": 5,
     "name": "Criss Elena Rodriguez",
     "specialty": "Geriatría"
+  },
+  {
+    "id": 6,
+    "name": "David Rodriguez",
+    "specialty": "Internismo"
   }
 ]

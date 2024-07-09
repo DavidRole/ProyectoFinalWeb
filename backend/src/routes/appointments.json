@@ -12,14 +12,14 @@
       "date": "2024-06-18",
       "patient": 1,
       "hour": "10:00",
-      "state": "active"
+      "state": "canceled"
     },
     {
       "employeeId": 1,
       "date": "2024-06-18",
       "patient": 3,
       "hour": "17:00",
-      "state": "active"
+      "state": "canceled"
     },
     {
       "employeeId": 5,
@@ -47,6 +47,13 @@
       "date": "2024-07-10",
       "patient": 2,
       "hour": "09:00",
+      "state": "canceled"
+    },
+    {
+      "employeeId": 6,
+      "date": "2024-07-12",
+      "patient": 3,
+      "hour": "08:00",
       "state": "canceled"
     }
   ]
